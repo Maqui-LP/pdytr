@@ -9,6 +9,6 @@ import java.rmi.RemoteException;
 /* This interface will need an implementing class */
 public interface IfaceRemoteClass extends Remote
 {
-/* It will be possible to invoke this method from an application in other JVM */
-public byte[] sendThisBack(byte[] data) throws RemoteException;
+    /* It will be possible to invoke this method from an application in other JVM */
+    public byte[] sendThisBack(byte[] data) throws RemoteException;
 }
