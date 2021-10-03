@@ -1,11 +1,9 @@
-package ftp;
-
 import java.rmi.Naming;
 import java.rmi.registry.Registry;
 
 public class MainServer {
     /**
-     * Instanciación del Server
+     * Instanciacion del Server
      * Registrar en el RMIRegistry
      * ...
      */
@@ -16,12 +14,12 @@ public class MainServer {
             System.exit(1);
         }
         try {
+            Server server = new Server();
+            
             String rname = "//" + args[0] + ":" + Registry.REGISTRY_PORT + "/remote";
-            FtpServerInterface remote = (FtpServerInterface) Naming.lookup(rname);
-            int bufferlength = 100;
-            byte[] buffer = new byte[bufferlength];
-            //remote.sendThisBack(buffer);
+            Naming.rebind(rname, server);
             System.out.println("Done");
+
         } catch (Exception e) {
             e.printStackTrace();
         }    

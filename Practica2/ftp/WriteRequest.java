@@ -1,6 +1,5 @@
-package ftp;
-
-public class WriteRequest {
+import java.io.Serializable;
+public class WriteRequest implements Serializable {
     
     private String filename;
     private int bytes;
