@@ -34,6 +34,8 @@ public class MainClient {
             
                 System.out.println("Fin del write");
             
+            }else if(args[1].equals("ejercicio-b")){
+                Client.resolucionTresB(remote);
             }
         } catch (Exception e) {
             e.printStackTrace();

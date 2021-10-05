@@ -1,8 +1,11 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
@@ -43,23 +46,32 @@ public class Server extends UnicastRemoteObject implements FtpServerInterface {
     }
 
     @Override
-    public int write(WriteRequest request) throws Exception {
+    public int write(WriteRequest request)throws RemoteException{
 
         Path path = Paths.get(this.outPath + request.getFilename());
-        int totalBytesBeforesWrite = Files.readAllBytes(path).length;
-        //OutputStream out = Files.newOutputStream(path, StandardOpenOption.APPEND,StandardOpenOption.CREATE);        
-        //out.write(request.getData(), 0, request.getData().length);
-        System.out.println("es ejecutable: " + Files.isExecutable(path));
-        System.out.println("es escribible: " + Files.isWritable(path));
-          try {
-            Files.write(path, request.getData(), StandardOpenOption.APPEND);
+        int totalBytesBeforesWrite = 0 ;
+        try {
+            if(Files.exists(path)){
+                totalBytesBeforesWrite = Files.readAllBytes(path).length;
+            }
+            
+            Files.write(path, request.getData(), StandardOpenOption.CREATE,StandardOpenOption.APPEND);            
+            
+            if(totalBytesBeforesWrite > 0){
+                totalBytesBeforesWrite = Files.readAllBytes(path).length - totalBytesBeforesWrite;
+            }else {
+                totalBytesBeforesWrite = Files.readAllBytes(path).length;
+            }
+            
         } catch (IOException e) {
-            Files.createFile(path);
-                Files.write(path, request.getData(), StandardOpenOption.APPEND);
-        }
-        //Files.write(path, request.getData(),StandardOpenOption.CREATE,StandardOpenOption.APPEND);
-        return Files.readAllBytes(path).length - totalBytesBeforesWrite;
+            e.printStackTrace();
+        }catch(Exception e){
+            e.printStackTrace();
+        } 
+        
+        return totalBytesBeforesWrite;
+        
         
     }
-
+   
 }

@@ -47,12 +47,7 @@ public class Client {
                 isEOF = response.getIsEOF();
                 position = position + bytesRead;
                 Files.write(Paths.get(outputPath + outputFilename), data, StandardOpenOption.CREATE,StandardOpenOption.APPEND);                    
-                // try {
-                //     Files.write(Paths.get(outputPath), data, StandardOpenOption.APPEND);
-                // } catch (IOException e) {
-                //     Files.createFile(Paths.get(outputPath));
-                //     Files.write(Paths.get(outputPath), data, StandardOpenOption.APPEND);
-                // }
+                
             }
         } catch(RemoteException e) {
             System.err.println("Error de conexion");
@@ -83,6 +78,21 @@ public class Client {
             e.printStackTrace();
         }
     }
+
+    public static void resolucionTresB(FtpServerInterface remote){
+        Client clientToRead = new Client("ejercicio-b","/pdytr/archivos/","outputEjercicio-b","/pdytr/archivos/", 100, 0);
+        System.out.println("Copiando en filesystem del cliente un archivo del servidor...");
+        clientToRead.read(remote);
+        System.out.println("Fin copia..");
+        Client clientToWrite = new Client.Builder().build();
+        try {
+            clientToWrite.write(remote, "nuevo-archivo-ejercicio-b", Files.readAllBytes(Paths.get("/pdytr/archivos/outputEjercicio-b")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Fin ejercicio 2.B");
+    }
+    
 
     public static class Builder{
         private String sourceFilename = "";
