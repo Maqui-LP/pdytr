@@ -25,4 +25,8 @@ public interface FtpServerInterface extends Remote {
      */
     public int write(WriteRequest request) throws Exception;
 
+    public boolean giveMeABoolean() throws Exception;
+
+    public void timeout()throws Exception;
+
 }

@@ -11,7 +11,6 @@ public class MainClient {
         try {
             String rname = "//" + args[0] + ":" + Registry.REGISTRY_PORT + "/remote";
             FtpServerInterface remote = (FtpServerInterface) Naming.lookup(rname);
-            //Client client = new Client(args[2], args[3], args[4], args[5], Integer.parseInt(args[6]), Integer.parseInt(args[7]));
 
             if(args[1].equals("read") ) {
                 
@@ -36,6 +35,15 @@ public class MainClient {
             
             }else if(args[1].equals("ejercicio-b")){
                 Client.resolucionTresB(remote);
+            }else if(args[1].equals("ejercicio-5-a")){
+                long start = System.nanoTime();
+                remote.giveMeABoolean();
+                long end = System.nanoTime() - start;                
+                double miliSeconds = (double)end / 1_000_000.0;
+                System.out.println("Tiempo en milisegundos: " + miliSeconds);
+                
+            }else if(args[1].equals("timeout")){
+                Client.timeout(remote);
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,18 +1,16 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
+
 import java.io.IOException;
-import java.io.OutputStream;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.io.RandomAccessFile;
+import java.math.BigInteger;
 
 public class Server extends UnicastRemoteObject implements FtpServerInterface {
 
@@ -69,9 +67,22 @@ public class Server extends UnicastRemoteObject implements FtpServerInterface {
             e.printStackTrace();
         } 
         
-        return totalBytesBeforesWrite;
-        
-        
+        return totalBytesBeforesWrite;        
+    }
+
+    @Override
+    public boolean giveMeABoolean() throws Exception{
+        return true;
+    };
+
+    @Override
+    public void timeout() throws Exception{
+        BigInteger  count = BigInteger.ONE;
+        while(true){
+            if(count == BigInteger.valueOf(99999999999999999L)){
+                break;
+            }
+        };
     }
    
 }

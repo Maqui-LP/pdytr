@@ -93,6 +93,13 @@ public class Client {
         System.out.println("Fin ejercicio 2.B");
     }
     
+    public static void timeout(FtpServerInterface remote){
+        try {
+           remote.timeout();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static class Builder{
         private String sourceFilename = "";
