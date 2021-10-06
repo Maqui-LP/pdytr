@@ -1,5 +1,4 @@
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.nio.file.Files;
@@ -38,21 +37,20 @@ public class Client {
             boolean isEOF = false;
             int position = initialPosition;
             // Se tienen que actualizar initialPosition, isEOF(empieza con false)
-            while(!isEOF){
-                ReadRequest request = new ReadRequest(sourceFilename, sourcePath, bytesToRead, position);
+           
+            ReadRequest request = new ReadRequest(sourceFilename, sourcePath, bytesToRead, position);
 
-                ReadResponse response = remote.read(request);
+            ReadResponse response = remote.read(request);
 
-                byte[] data = response.getData();
-                int bytesRead = response.getBytesEffectivelyRead();
-                isEOF = response.getIsEOF();
-                if (data.length > bytesRead) {
-                    data = Arrays.copyOf(data, bytesRead);
-                }
-                position = position + bytesRead;
-                Files.write(Paths.get(outputPath + outputFilename), data, StandardOpenOption.CREATE,StandardOpenOption.APPEND);                    
-                
+            byte[] data = response.getData();
+            int bytesRead = response.getBytesEffectivelyRead();
+            isEOF = response.getIsEOF();
+            if (data.length > bytesRead) {
+                data = Arrays.copyOf(data, bytesRead);
             }
+            position = position + bytesRead;
+            Files.write(Paths.get(outputPath + outputFilename), data, StandardOpenOption.CREATE,StandardOpenOption.APPEND);                    
+                
         } catch(RemoteException e) {
             System.err.println("Error de conexion");
             e.printStackTrace();

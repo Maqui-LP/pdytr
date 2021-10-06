@@ -3,7 +3,6 @@ import java.rmi.server.UnicastRemoteObject;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,11 +30,17 @@ public class Server extends UnicastRemoteObject implements FtpServerInterface {
         int bytesToRead = Math.min(bytesAskedToRead, fileInputStream.available());
 
         byte[] data = new byte[bytesToRead];
+        if(file.length() < request.getInitialPosition()){
+            file.close();
+            fileInputStream.close();
+            return new ReadResponse(data,0,true);
+        }
         file.seek(pos);
         int bytesOK = fileInputStream.read(data, 0, bytesToRead);
         boolean isEOF = (fileInputStream.available() == 0);
+        file.close();
         fileInputStream.close();
-
+        
         ReadResponse response = new ReadResponse(data, bytesOK, isEOF);
 
         return response;
