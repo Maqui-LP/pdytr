@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
 
 public class Client {
 
@@ -45,6 +46,9 @@ public class Client {
                 byte[] data = response.getData();
                 int bytesRead = response.getBytesEffectivelyRead();
                 isEOF = response.getIsEOF();
+                if (data.length > bytesRead) {
+                    data = Arrays.copyOf(data, bytesRead);
+                }
                 position = position + bytesRead;
                 Files.write(Paths.get(outputPath + outputFilename), data, StandardOpenOption.CREATE,StandardOpenOption.APPEND);                    
                 
