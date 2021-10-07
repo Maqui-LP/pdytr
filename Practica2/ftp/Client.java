@@ -82,7 +82,13 @@ public class Client {
     }
 
     public static void resolucionTresB(FtpServerInterface remote){
-        Client clientToRead = new Client("ejercicio-b","/pdytr/archivos/","outputEjercicio-b","/pdytr/archivos/", 100, 0);
+        int bytes = 0;
+        try {
+            bytes = Files.readAllBytes(Paths.get("/pdytr/archivos/ejercicio-b")).length;
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        Client clientToRead = new Client("ejercicio-b","/pdytr/archivos/","outputEjercicio-b","/pdytr/archivos/", bytes, 0);
         System.out.println("Copiando en filesystem del cliente un archivo del servidor...");
         clientToRead.read(remote);
         System.out.println("Fin copia..");
