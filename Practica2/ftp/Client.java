@@ -1,9 +1,13 @@
 import java.rmi.RemoteException;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
+
 
 public class Client {
 
@@ -63,15 +67,28 @@ public class Client {
         }
     }
 
-    public void write(FtpServerInterface remote, String filename, byte[] data){
+    public void write(FtpServerInterface remote, String filename,String sourceFile){
         try {
 
-            WriteRequest request = new WriteRequest(filename, data.length, data);
-            int response = remote.write(request);
-            
-            String outputMsj = String.format("Se enviaron %d bytes y se escribieron efectivamente %d bytes.",data.length, response);
-            System.out.println(outputMsj);
+            RandomAccessFile file = new RandomAccessFile(Paths.get(sourceFile).toString(),"r");
+            FileDescriptor fd = file.getFD();
+            FileInputStream fis = new FileInputStream(fd);
+            byte[] partialData = new byte[1024];
 
+            int bytesReaded;
+            int totalBytesWritten = 0;
+
+            while(fis.available() > 0){
+                bytesReaded = fis.read(partialData,0,Math.min(1024, fis.available()));
+                byte[]cleanArray = Arrays.copyOf(partialData, bytesReaded);
+                totalBytesWritten += remote.write(new WriteRequest(filename, bytesReaded, cleanArray));
+            }
+
+            fis.close();
+            System.out.println("Operacion write finalizada.");
+            String outputMsj = String.format("Se escribieron efectivamente %d bytes en total.",totalBytesWritten);
+            System.out.println(outputMsj);
+        
         }catch(RemoteException e){
             System.err.println("Error de conexion.");
             e.printStackTrace();
@@ -91,11 +108,12 @@ public class Client {
         Client clientToRead = new Client("ejercicio-b","/pdytr/archivos/","outputEjercicio-b","/pdytr/archivos/", bytes, 0);
         System.out.println("Copiando en filesystem del cliente un archivo del servidor...");
         clientToRead.read(remote);
-        System.out.println("Fin copia..");
+        System.out.println("Fin copia... se genero el archivo: outputEjercicio-b");
         Client clientToWrite = new Client.Builder().build();
         try {
-            clientToWrite.write(remote, "nuevo-archivo-ejercicio-b", Files.readAllBytes(Paths.get("/pdytr/archivos/outputEjercicio-b")));
-        } catch (IOException e) {
+            clientToWrite.write(remote, "nuevo-archivo-ejercicio-b","/pdytr/archivos/outputEjercicio-b");
+            System.out.println("Se genero el archivo: nuevo-archivo-ejercicio-b");
+        }catch(Exception e){
             e.printStackTrace();
         }
         System.out.println("Fin ejercicio 2.B");
