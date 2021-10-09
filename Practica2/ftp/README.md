@@ -47,7 +47,7 @@ $ java MainClient localhost write
 ```
 Una vez ejecutado el comando el cliente solicitará:
 - Nombre del archivo a escribir.
-- El contenido a ser escrito.
+- La ruta absoluta al archivo fuente del cual extraer el contenido a escribir por ej: /pdytr/archivos/filename
 > NOTA: El servidor almacenará el archivo en la carpeta /pdytr/archivos/
 
 
@@ -71,6 +71,13 @@ $ java MainClient localhost ejercicio-5-a
 $ cd /pdytr/
 $ java sun.rmi.transport.tcp.responseTimeout=[tiempoEnMilisegundosDeseado] MainClient localhost timeout
 ```
+
+### Operacion concurrency
+```sh
+$ cd /pdytr/
+$ java MainClient localhost concurrency
+```
+> NOTA: el experimento utilizara dos threads para escribir el contenido del archivo "concurrency-experiment" en el archivo "out-concurrency"
 
 ## Detener servidor:
 ```sh
