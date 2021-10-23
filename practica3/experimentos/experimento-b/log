@@ -1,0 +1,1180 @@
+Ejecucion nro: 1
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Detecting the operating system and CPU architecture
+[INFO] ------------------------------------------------------------------------
+[INFO] os.detected.name: linux
+[INFO] os.detected.arch: x86_64
+[INFO] os.detected.version: 5.10
+[INFO] os.detected.version.major: 5
+[INFO] os.detected.version.minor: 10
+[INFO] os.detected.release: manjaro
+[INFO] os.detected.release.like.manjaro: true
+[INFO] os.detected.release.like.arch: true
+[INFO] os.detected.classifier: linux-x86_64
+[INFO] 
+[INFO] ----------------< pdytr.example.grpc:grpc-hello-server >----------------
+[INFO] Building grpc-hello-server 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/java
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile-custom (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/grpc-java
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/main/resources
+[INFO] Copying 1 resource
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ grpc-hello-server ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 5 source files to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ grpc-hello-server ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ grpc-hello-server ---
+[INFO] Surefire report directory: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running pdytr.example.grpc.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ grpc-hello-server ---
+[INFO] Building jar: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/grpc-hello-server-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- exec-maven-plugin:3.0.0:java (default-cli) @ grpc-hello-server ---
+[WARNING] 
+io.grpc.StatusRuntimeException: DEADLINE_EXCEEDED: deadline exceeded after 966848939ns
+    at io.grpc.stub.ClientCalls.toStatusRuntimeException (ClientCalls.java:210)
+    at io.grpc.stub.ClientCalls.getUnchecked (ClientCalls.java:191)
+    at io.grpc.stub.ClientCalls.blockingUnaryCall (ClientCalls.java:124)
+    at pdytr.example.grpc.GreetingServiceGrpc$GreetingServiceBlockingStub.greeting (GreetingServiceGrpc.java:163)
+    at pdytr.example.grpc.Client.main (Client.java:37)
+    at org.codehaus.mojo.exec.ExecJavaMojo$1.run (ExecJavaMojo.java:254)
+    at java.lang.Thread.run (Thread.java:829)
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] was interrupted but is still alive after waiting at least 14997msecs
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-executor-0,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-2,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-3,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[threadDeathWatcher-3-1,1,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-4,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-5,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] NOTE: 7 thread(s) did not finish despite being asked to  via interruption. This is not a problem with exec:java, it is a problem with the running code. Although not serious, it should be remedied.
+[WARNING] Couldn't destroy threadgroup org.codehaus.mojo.exec.ExecJavaMojo$IsolatedThreadGroup[name=pdytr.example.grpc.Client,maxpri=10]
+java.lang.IllegalThreadStateException
+    at java.lang.ThreadGroup.destroy (ThreadGroup.java:776)
+    at org.codehaus.mojo.exec.ExecJavaMojo.execute (ExecJavaMojo.java:293)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:972)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:293)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:196)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:566)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.966 s
+[INFO] Finished at: 2021-10-23T12:31:04-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:3.0.0:java (default-cli) on project grpc-hello-server: An exception occured while executing the Java class. DEADLINE_EXCEEDED: deadline exceeded after 966848939ns -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+Ejecucion nro: 2
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Detecting the operating system and CPU architecture
+[INFO] ------------------------------------------------------------------------
+[INFO] os.detected.name: linux
+[INFO] os.detected.arch: x86_64
+[INFO] os.detected.version: 5.10
+[INFO] os.detected.version.major: 5
+[INFO] os.detected.version.minor: 10
+[INFO] os.detected.release: manjaro
+[INFO] os.detected.release.like.manjaro: true
+[INFO] os.detected.release.like.arch: true
+[INFO] os.detected.classifier: linux-x86_64
+[INFO] 
+[INFO] ----------------< pdytr.example.grpc:grpc-hello-server >----------------
+[INFO] Building grpc-hello-server 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/java
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile-custom (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/grpc-java
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/main/resources
+[INFO] Copying 1 resource
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ grpc-hello-server ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 5 source files to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ grpc-hello-server ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ grpc-hello-server ---
+[INFO] Surefire report directory: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running pdytr.example.grpc.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ grpc-hello-server ---
+[INFO] Building jar: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/grpc-hello-server-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- exec-maven-plugin:3.0.0:java (default-cli) @ grpc-hello-server ---
+[WARNING] 
+io.grpc.StatusRuntimeException: DEADLINE_EXCEEDED: deadline exceeded after 962159748ns
+    at io.grpc.stub.ClientCalls.toStatusRuntimeException (ClientCalls.java:210)
+    at io.grpc.stub.ClientCalls.getUnchecked (ClientCalls.java:191)
+    at io.grpc.stub.ClientCalls.blockingUnaryCall (ClientCalls.java:124)
+    at pdytr.example.grpc.GreetingServiceGrpc$GreetingServiceBlockingStub.greeting (GreetingServiceGrpc.java:163)
+    at pdytr.example.grpc.Client.main (Client.java:37)
+    at org.codehaus.mojo.exec.ExecJavaMojo$1.run (ExecJavaMojo.java:254)
+    at java.lang.Thread.run (Thread.java:829)
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] was interrupted but is still alive after waiting at least 14998msecs
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-executor-0,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-2,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-3,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[threadDeathWatcher-3-1,1,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-4,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-5,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] NOTE: 7 thread(s) did not finish despite being asked to  via interruption. This is not a problem with exec:java, it is a problem with the running code. Although not serious, it should be remedied.
+[WARNING] Couldn't destroy threadgroup org.codehaus.mojo.exec.ExecJavaMojo$IsolatedThreadGroup[name=pdytr.example.grpc.Client,maxpri=10]
+java.lang.IllegalThreadStateException
+    at java.lang.ThreadGroup.destroy (ThreadGroup.java:776)
+    at org.codehaus.mojo.exec.ExecJavaMojo.execute (ExecJavaMojo.java:293)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:972)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:293)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:196)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:566)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.363 s
+[INFO] Finished at: 2021-10-23T12:31:26-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:3.0.0:java (default-cli) on project grpc-hello-server: An exception occured while executing the Java class. DEADLINE_EXCEEDED: deadline exceeded after 962159748ns -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+Ejecucion nro: 3
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Detecting the operating system and CPU architecture
+[INFO] ------------------------------------------------------------------------
+[INFO] os.detected.name: linux
+[INFO] os.detected.arch: x86_64
+[INFO] os.detected.version: 5.10
+[INFO] os.detected.version.major: 5
+[INFO] os.detected.version.minor: 10
+[INFO] os.detected.release: manjaro
+[INFO] os.detected.release.like.manjaro: true
+[INFO] os.detected.release.like.arch: true
+[INFO] os.detected.classifier: linux-x86_64
+[INFO] 
+[INFO] ----------------< pdytr.example.grpc:grpc-hello-server >----------------
+[INFO] Building grpc-hello-server 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/java
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile-custom (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/grpc-java
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/main/resources
+[INFO] Copying 1 resource
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ grpc-hello-server ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 5 source files to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ grpc-hello-server ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ grpc-hello-server ---
+[INFO] Surefire report directory: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running pdytr.example.grpc.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ grpc-hello-server ---
+[INFO] Building jar: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/grpc-hello-server-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- exec-maven-plugin:3.0.0:java (default-cli) @ grpc-hello-server ---
+[WARNING] 
+io.grpc.StatusRuntimeException: DEADLINE_EXCEEDED: deadline exceeded after 969672873ns
+    at io.grpc.stub.ClientCalls.toStatusRuntimeException (ClientCalls.java:210)
+    at io.grpc.stub.ClientCalls.getUnchecked (ClientCalls.java:191)
+    at io.grpc.stub.ClientCalls.blockingUnaryCall (ClientCalls.java:124)
+    at pdytr.example.grpc.GreetingServiceGrpc$GreetingServiceBlockingStub.greeting (GreetingServiceGrpc.java:163)
+    at pdytr.example.grpc.Client.main (Client.java:37)
+    at org.codehaus.mojo.exec.ExecJavaMojo$1.run (ExecJavaMojo.java:254)
+    at java.lang.Thread.run (Thread.java:829)
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] was interrupted but is still alive after waiting at least 14998msecs
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-executor-0,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-2,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-3,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[threadDeathWatcher-3-1,1,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-4,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-5,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] NOTE: 7 thread(s) did not finish despite being asked to  via interruption. This is not a problem with exec:java, it is a problem with the running code. Although not serious, it should be remedied.
+[WARNING] Couldn't destroy threadgroup org.codehaus.mojo.exec.ExecJavaMojo$IsolatedThreadGroup[name=pdytr.example.grpc.Client,maxpri=10]
+java.lang.IllegalThreadStateException
+    at java.lang.ThreadGroup.destroy (ThreadGroup.java:776)
+    at org.codehaus.mojo.exec.ExecJavaMojo.execute (ExecJavaMojo.java:293)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:972)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:293)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:196)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:566)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.089 s
+[INFO] Finished at: 2021-10-23T12:31:48-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:3.0.0:java (default-cli) on project grpc-hello-server: An exception occured while executing the Java class. DEADLINE_EXCEEDED: deadline exceeded after 969672873ns -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+Ejecucion nro: 4
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Detecting the operating system and CPU architecture
+[INFO] ------------------------------------------------------------------------
+[INFO] os.detected.name: linux
+[INFO] os.detected.arch: x86_64
+[INFO] os.detected.version: 5.10
+[INFO] os.detected.version.major: 5
+[INFO] os.detected.version.minor: 10
+[INFO] os.detected.release: manjaro
+[INFO] os.detected.release.like.manjaro: true
+[INFO] os.detected.release.like.arch: true
+[INFO] os.detected.classifier: linux-x86_64
+[INFO] 
+[INFO] ----------------< pdytr.example.grpc:grpc-hello-server >----------------
+[INFO] Building grpc-hello-server 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/java
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile-custom (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/grpc-java
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/main/resources
+[INFO] Copying 1 resource
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ grpc-hello-server ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 5 source files to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ grpc-hello-server ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ grpc-hello-server ---
+[INFO] Surefire report directory: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running pdytr.example.grpc.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ grpc-hello-server ---
+[INFO] Building jar: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/grpc-hello-server-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- exec-maven-plugin:3.0.0:java (default-cli) @ grpc-hello-server ---
+[WARNING] 
+io.grpc.StatusRuntimeException: DEADLINE_EXCEEDED: deadline exceeded after 965859815ns
+    at io.grpc.stub.ClientCalls.toStatusRuntimeException (ClientCalls.java:210)
+    at io.grpc.stub.ClientCalls.getUnchecked (ClientCalls.java:191)
+    at io.grpc.stub.ClientCalls.blockingUnaryCall (ClientCalls.java:124)
+    at pdytr.example.grpc.GreetingServiceGrpc$GreetingServiceBlockingStub.greeting (GreetingServiceGrpc.java:163)
+    at pdytr.example.grpc.Client.main (Client.java:37)
+    at org.codehaus.mojo.exec.ExecJavaMojo$1.run (ExecJavaMojo.java:254)
+    at java.lang.Thread.run (Thread.java:829)
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] was interrupted but is still alive after waiting at least 14998msecs
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-executor-0,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-2,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-3,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[threadDeathWatcher-3-1,1,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-4,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-5,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] NOTE: 7 thread(s) did not finish despite being asked to  via interruption. This is not a problem with exec:java, it is a problem with the running code. Although not serious, it should be remedied.
+[WARNING] Couldn't destroy threadgroup org.codehaus.mojo.exec.ExecJavaMojo$IsolatedThreadGroup[name=pdytr.example.grpc.Client,maxpri=10]
+java.lang.IllegalThreadStateException
+    at java.lang.ThreadGroup.destroy (ThreadGroup.java:776)
+    at org.codehaus.mojo.exec.ExecJavaMojo.execute (ExecJavaMojo.java:293)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:972)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:293)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:196)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:566)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.421 s
+[INFO] Finished at: 2021-10-23T12:32:11-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:3.0.0:java (default-cli) on project grpc-hello-server: An exception occured while executing the Java class. DEADLINE_EXCEEDED: deadline exceeded after 965859815ns -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+Ejecucion nro: 5
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Detecting the operating system and CPU architecture
+[INFO] ------------------------------------------------------------------------
+[INFO] os.detected.name: linux
+[INFO] os.detected.arch: x86_64
+[INFO] os.detected.version: 5.10
+[INFO] os.detected.version.major: 5
+[INFO] os.detected.version.minor: 10
+[INFO] os.detected.release: manjaro
+[INFO] os.detected.release.like.manjaro: true
+[INFO] os.detected.release.like.arch: true
+[INFO] os.detected.classifier: linux-x86_64
+[INFO] 
+[INFO] ----------------< pdytr.example.grpc:grpc-hello-server >----------------
+[INFO] Building grpc-hello-server 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/java
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile-custom (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/grpc-java
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/main/resources
+[INFO] Copying 1 resource
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ grpc-hello-server ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 5 source files to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ grpc-hello-server ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ grpc-hello-server ---
+[INFO] Surefire report directory: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running pdytr.example.grpc.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ grpc-hello-server ---
+[INFO] Building jar: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/grpc-hello-server-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- exec-maven-plugin:3.0.0:java (default-cli) @ grpc-hello-server ---
+[WARNING] 
+io.grpc.StatusRuntimeException: DEADLINE_EXCEEDED: deadline exceeded after 964943032ns
+    at io.grpc.stub.ClientCalls.toStatusRuntimeException (ClientCalls.java:210)
+    at io.grpc.stub.ClientCalls.getUnchecked (ClientCalls.java:191)
+    at io.grpc.stub.ClientCalls.blockingUnaryCall (ClientCalls.java:124)
+    at pdytr.example.grpc.GreetingServiceGrpc$GreetingServiceBlockingStub.greeting (GreetingServiceGrpc.java:163)
+    at pdytr.example.grpc.Client.main (Client.java:37)
+    at org.codehaus.mojo.exec.ExecJavaMojo$1.run (ExecJavaMojo.java:254)
+    at java.lang.Thread.run (Thread.java:829)
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] was interrupted but is still alive after waiting at least 14997msecs
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-executor-0,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-2,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-3,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[threadDeathWatcher-3-1,1,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-4,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-5,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] NOTE: 7 thread(s) did not finish despite being asked to  via interruption. This is not a problem with exec:java, it is a problem with the running code. Although not serious, it should be remedied.
+[WARNING] Couldn't destroy threadgroup org.codehaus.mojo.exec.ExecJavaMojo$IsolatedThreadGroup[name=pdytr.example.grpc.Client,maxpri=10]
+java.lang.IllegalThreadStateException
+    at java.lang.ThreadGroup.destroy (ThreadGroup.java:776)
+    at org.codehaus.mojo.exec.ExecJavaMojo.execute (ExecJavaMojo.java:293)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:972)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:293)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:196)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:566)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.456 s
+[INFO] Finished at: 2021-10-23T12:32:33-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:3.0.0:java (default-cli) on project grpc-hello-server: An exception occured while executing the Java class. DEADLINE_EXCEEDED: deadline exceeded after 964943032ns -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+Ejecucion nro: 6
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Detecting the operating system and CPU architecture
+[INFO] ------------------------------------------------------------------------
+[INFO] os.detected.name: linux
+[INFO] os.detected.arch: x86_64
+[INFO] os.detected.version: 5.10
+[INFO] os.detected.version.major: 5
+[INFO] os.detected.version.minor: 10
+[INFO] os.detected.release: manjaro
+[INFO] os.detected.release.like.manjaro: true
+[INFO] os.detected.release.like.arch: true
+[INFO] os.detected.classifier: linux-x86_64
+[INFO] 
+[INFO] ----------------< pdytr.example.grpc:grpc-hello-server >----------------
+[INFO] Building grpc-hello-server 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/java
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile-custom (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/grpc-java
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/main/resources
+[INFO] Copying 1 resource
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ grpc-hello-server ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 5 source files to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ grpc-hello-server ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ grpc-hello-server ---
+[INFO] Surefire report directory: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running pdytr.example.grpc.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ grpc-hello-server ---
+[INFO] Building jar: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/grpc-hello-server-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- exec-maven-plugin:3.0.0:java (default-cli) @ grpc-hello-server ---
+[WARNING] 
+io.grpc.StatusRuntimeException: DEADLINE_EXCEEDED: deadline exceeded after 964950813ns
+    at io.grpc.stub.ClientCalls.toStatusRuntimeException (ClientCalls.java:210)
+    at io.grpc.stub.ClientCalls.getUnchecked (ClientCalls.java:191)
+    at io.grpc.stub.ClientCalls.blockingUnaryCall (ClientCalls.java:124)
+    at pdytr.example.grpc.GreetingServiceGrpc$GreetingServiceBlockingStub.greeting (GreetingServiceGrpc.java:163)
+    at pdytr.example.grpc.Client.main (Client.java:37)
+    at org.codehaus.mojo.exec.ExecJavaMojo$1.run (ExecJavaMojo.java:254)
+    at java.lang.Thread.run (Thread.java:829)
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] was interrupted but is still alive after waiting at least 14997msecs
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-executor-0,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-2,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-3,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[threadDeathWatcher-3-1,1,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-4,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-5,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] NOTE: 7 thread(s) did not finish despite being asked to  via interruption. This is not a problem with exec:java, it is a problem with the running code. Although not serious, it should be remedied.
+[WARNING] Couldn't destroy threadgroup org.codehaus.mojo.exec.ExecJavaMojo$IsolatedThreadGroup[name=pdytr.example.grpc.Client,maxpri=10]
+java.lang.IllegalThreadStateException
+    at java.lang.ThreadGroup.destroy (ThreadGroup.java:776)
+    at org.codehaus.mojo.exec.ExecJavaMojo.execute (ExecJavaMojo.java:293)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:972)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:293)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:196)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:566)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.513 s
+[INFO] Finished at: 2021-10-23T12:32:56-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:3.0.0:java (default-cli) on project grpc-hello-server: An exception occured while executing the Java class. DEADLINE_EXCEEDED: deadline exceeded after 964950813ns -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+Ejecucion nro: 7
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Detecting the operating system and CPU architecture
+[INFO] ------------------------------------------------------------------------
+[INFO] os.detected.name: linux
+[INFO] os.detected.arch: x86_64
+[INFO] os.detected.version: 5.10
+[INFO] os.detected.version.major: 5
+[INFO] os.detected.version.minor: 10
+[INFO] os.detected.release: manjaro
+[INFO] os.detected.release.like.manjaro: true
+[INFO] os.detected.release.like.arch: true
+[INFO] os.detected.classifier: linux-x86_64
+[INFO] 
+[INFO] ----------------< pdytr.example.grpc:grpc-hello-server >----------------
+[INFO] Building grpc-hello-server 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/java
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile-custom (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/grpc-java
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/main/resources
+[INFO] Copying 1 resource
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ grpc-hello-server ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 5 source files to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ grpc-hello-server ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ grpc-hello-server ---
+[INFO] Surefire report directory: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running pdytr.example.grpc.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ grpc-hello-server ---
+[INFO] Building jar: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/grpc-hello-server-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- exec-maven-plugin:3.0.0:java (default-cli) @ grpc-hello-server ---
+[WARNING] 
+io.grpc.StatusRuntimeException: DEADLINE_EXCEEDED: deadline exceeded after 966503760ns
+    at io.grpc.stub.ClientCalls.toStatusRuntimeException (ClientCalls.java:210)
+    at io.grpc.stub.ClientCalls.getUnchecked (ClientCalls.java:191)
+    at io.grpc.stub.ClientCalls.blockingUnaryCall (ClientCalls.java:124)
+    at pdytr.example.grpc.GreetingServiceGrpc$GreetingServiceBlockingStub.greeting (GreetingServiceGrpc.java:163)
+    at pdytr.example.grpc.Client.main (Client.java:37)
+    at org.codehaus.mojo.exec.ExecJavaMojo$1.run (ExecJavaMojo.java:254)
+    at java.lang.Thread.run (Thread.java:829)
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] was interrupted but is still alive after waiting at least 14997msecs
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-executor-0,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-2,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-3,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[threadDeathWatcher-3-1,1,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-4,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-5,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] NOTE: 7 thread(s) did not finish despite being asked to  via interruption. This is not a problem with exec:java, it is a problem with the running code. Although not serious, it should be remedied.
+[WARNING] Couldn't destroy threadgroup org.codehaus.mojo.exec.ExecJavaMojo$IsolatedThreadGroup[name=pdytr.example.grpc.Client,maxpri=10]
+java.lang.IllegalThreadStateException
+    at java.lang.ThreadGroup.destroy (ThreadGroup.java:776)
+    at org.codehaus.mojo.exec.ExecJavaMojo.execute (ExecJavaMojo.java:293)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:972)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:293)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:196)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:566)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.713 s
+[INFO] Finished at: 2021-10-23T12:33:19-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:3.0.0:java (default-cli) on project grpc-hello-server: An exception occured while executing the Java class. DEADLINE_EXCEEDED: deadline exceeded after 966503760ns -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+Ejecucion nro: 8
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Detecting the operating system and CPU architecture
+[INFO] ------------------------------------------------------------------------
+[INFO] os.detected.name: linux
+[INFO] os.detected.arch: x86_64
+[INFO] os.detected.version: 5.10
+[INFO] os.detected.version.major: 5
+[INFO] os.detected.version.minor: 10
+[INFO] os.detected.release: manjaro
+[INFO] os.detected.release.like.manjaro: true
+[INFO] os.detected.release.like.arch: true
+[INFO] os.detected.classifier: linux-x86_64
+[INFO] 
+[INFO] ----------------< pdytr.example.grpc:grpc-hello-server >----------------
+[INFO] Building grpc-hello-server 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/java
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile-custom (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/grpc-java
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/main/resources
+[INFO] Copying 1 resource
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ grpc-hello-server ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 5 source files to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ grpc-hello-server ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ grpc-hello-server ---
+[INFO] Surefire report directory: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running pdytr.example.grpc.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ grpc-hello-server ---
+[INFO] Building jar: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/grpc-hello-server-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- exec-maven-plugin:3.0.0:java (default-cli) @ grpc-hello-server ---
+[WARNING] 
+io.grpc.StatusRuntimeException: DEADLINE_EXCEEDED: deadline exceeded after 966066541ns
+    at io.grpc.stub.ClientCalls.toStatusRuntimeException (ClientCalls.java:210)
+    at io.grpc.stub.ClientCalls.getUnchecked (ClientCalls.java:191)
+    at io.grpc.stub.ClientCalls.blockingUnaryCall (ClientCalls.java:124)
+    at pdytr.example.grpc.GreetingServiceGrpc$GreetingServiceBlockingStub.greeting (GreetingServiceGrpc.java:163)
+    at pdytr.example.grpc.Client.main (Client.java:37)
+    at org.codehaus.mojo.exec.ExecJavaMojo$1.run (ExecJavaMojo.java:254)
+    at java.lang.Thread.run (Thread.java:829)
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] was interrupted but is still alive after waiting at least 14998msecs
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-executor-0,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-2,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-3,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[threadDeathWatcher-3-1,1,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-4,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-5,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] NOTE: 7 thread(s) did not finish despite being asked to  via interruption. This is not a problem with exec:java, it is a problem with the running code. Although not serious, it should be remedied.
+[WARNING] Couldn't destroy threadgroup org.codehaus.mojo.exec.ExecJavaMojo$IsolatedThreadGroup[name=pdytr.example.grpc.Client,maxpri=10]
+java.lang.IllegalThreadStateException
+    at java.lang.ThreadGroup.destroy (ThreadGroup.java:776)
+    at org.codehaus.mojo.exec.ExecJavaMojo.execute (ExecJavaMojo.java:293)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:972)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:293)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:196)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:566)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.631 s
+[INFO] Finished at: 2021-10-23T12:33:42-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:3.0.0:java (default-cli) on project grpc-hello-server: An exception occured while executing the Java class. DEADLINE_EXCEEDED: deadline exceeded after 966066541ns -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+Ejecucion nro: 9
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Detecting the operating system and CPU architecture
+[INFO] ------------------------------------------------------------------------
+[INFO] os.detected.name: linux
+[INFO] os.detected.arch: x86_64
+[INFO] os.detected.version: 5.10
+[INFO] os.detected.version.major: 5
+[INFO] os.detected.version.minor: 10
+[INFO] os.detected.release: manjaro
+[INFO] os.detected.release.like.manjaro: true
+[INFO] os.detected.release.like.arch: true
+[INFO] os.detected.classifier: linux-x86_64
+[INFO] 
+[INFO] ----------------< pdytr.example.grpc:grpc-hello-server >----------------
+[INFO] Building grpc-hello-server 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/java
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile-custom (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/grpc-java
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/main/resources
+[INFO] Copying 1 resource
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ grpc-hello-server ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 5 source files to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ grpc-hello-server ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ grpc-hello-server ---
+[INFO] Surefire report directory: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running pdytr.example.grpc.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ grpc-hello-server ---
+[INFO] Building jar: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/grpc-hello-server-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- exec-maven-plugin:3.0.0:java (default-cli) @ grpc-hello-server ---
+[WARNING] 
+io.grpc.StatusRuntimeException: DEADLINE_EXCEEDED: deadline exceeded after 960222359ns
+    at io.grpc.stub.ClientCalls.toStatusRuntimeException (ClientCalls.java:210)
+    at io.grpc.stub.ClientCalls.getUnchecked (ClientCalls.java:191)
+    at io.grpc.stub.ClientCalls.blockingUnaryCall (ClientCalls.java:124)
+    at pdytr.example.grpc.GreetingServiceGrpc$GreetingServiceBlockingStub.greeting (GreetingServiceGrpc.java:163)
+    at pdytr.example.grpc.Client.main (Client.java:37)
+    at org.codehaus.mojo.exec.ExecJavaMojo$1.run (ExecJavaMojo.java:254)
+    at java.lang.Thread.run (Thread.java:829)
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] was interrupted but is still alive after waiting at least 14997msecs
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-executor-0,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-2,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-3,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[threadDeathWatcher-3-1,1,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-4,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-5,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] NOTE: 7 thread(s) did not finish despite being asked to  via interruption. This is not a problem with exec:java, it is a problem with the running code. Although not serious, it should be remedied.
+[WARNING] Couldn't destroy threadgroup org.codehaus.mojo.exec.ExecJavaMojo$IsolatedThreadGroup[name=pdytr.example.grpc.Client,maxpri=10]
+java.lang.IllegalThreadStateException
+    at java.lang.ThreadGroup.destroy (ThreadGroup.java:776)
+    at org.codehaus.mojo.exec.ExecJavaMojo.execute (ExecJavaMojo.java:293)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:972)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:293)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:196)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:566)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.561 s
+[INFO] Finished at: 2021-10-23T12:34:05-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:3.0.0:java (default-cli) on project grpc-hello-server: An exception occured while executing the Java class. DEADLINE_EXCEEDED: deadline exceeded after 960222359ns -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+Ejecucion nro: 10
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Detecting the operating system and CPU architecture
+[INFO] ------------------------------------------------------------------------
+[INFO] os.detected.name: linux
+[INFO] os.detected.arch: x86_64
+[INFO] os.detected.version: 5.10
+[INFO] os.detected.version.major: 5
+[INFO] os.detected.version.minor: 10
+[INFO] os.detected.release: manjaro
+[INFO] os.detected.release.like.manjaro: true
+[INFO] os.detected.release.like.arch: true
+[INFO] os.detected.classifier: linux-x86_64
+[INFO] 
+[INFO] ----------------< pdytr.example.grpc:grpc-hello-server >----------------
+[INFO] Building grpc-hello-server 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/java
+[INFO] 
+[INFO] --- protobuf-maven-plugin:0.5.0:compile-custom (default) @ grpc-hello-server ---
+[INFO] Compiling 1 proto file(s) to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/generated-sources/protobuf/grpc-java
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/main/resources
+[INFO] Copying 1 resource
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ grpc-hello-server ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 5 source files to /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ grpc-hello-server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ grpc-hello-server ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ grpc-hello-server ---
+[INFO] Surefire report directory: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running pdytr.example.grpc.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ grpc-hello-server ---
+[INFO] Building jar: /home/nico/gitProyects/pdytr/pdytr/practica3/experimentos/experimento-b/target/grpc-hello-server-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- exec-maven-plugin:3.0.0:java (default-cli) @ grpc-hello-server ---
+[WARNING] 
+io.grpc.StatusRuntimeException: DEADLINE_EXCEEDED: deadline exceeded after 964791769ns
+    at io.grpc.stub.ClientCalls.toStatusRuntimeException (ClientCalls.java:210)
+    at io.grpc.stub.ClientCalls.getUnchecked (ClientCalls.java:191)
+    at io.grpc.stub.ClientCalls.blockingUnaryCall (ClientCalls.java:124)
+    at pdytr.example.grpc.GreetingServiceGrpc$GreetingServiceBlockingStub.greeting (GreetingServiceGrpc.java:163)
+    at pdytr.example.grpc.Client.main (Client.java:37)
+    at org.codehaus.mojo.exec.ExecJavaMojo$1.run (ExecJavaMojo.java:254)
+    at java.lang.Thread.run (Thread.java:829)
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] was interrupted but is still alive after waiting at least 14998msecs
+[WARNING] thread Thread[grpc-default-worker-ELG-1-1,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-executor-0,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-2,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-3,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[threadDeathWatcher-3-1,1,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-4,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] thread Thread[grpc-default-worker-ELG-1-5,5,pdytr.example.grpc.Client] will linger despite being asked to die via interruption
+[WARNING] NOTE: 7 thread(s) did not finish despite being asked to  via interruption. This is not a problem with exec:java, it is a problem with the running code. Although not serious, it should be remedied.
+[WARNING] Couldn't destroy threadgroup org.codehaus.mojo.exec.ExecJavaMojo$IsolatedThreadGroup[name=pdytr.example.grpc.Client,maxpri=10]
+java.lang.IllegalThreadStateException
+    at java.lang.ThreadGroup.destroy (ThreadGroup.java:776)
+    at org.codehaus.mojo.exec.ExecJavaMojo.execute (ExecJavaMojo.java:293)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:972)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:293)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:196)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:566)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.747 s
+[INFO] Finished at: 2021-10-23T12:34:28-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:3.0.0:java (default-cli) on project grpc-hello-server: An exception occured while executing the Java class. DEADLINE_EXCEEDED: deadline exceeded after 964791769ns -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
