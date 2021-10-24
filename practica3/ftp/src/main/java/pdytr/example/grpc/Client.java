@@ -6,7 +6,7 @@ import io.grpc.stub.StreamObserver;
 import pdytr.example.grpc.GreetingServiceGrpc;
 import pdytr.example.grpc.GreetingServiceOuterClass.WriteRequest;
 
-import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -21,8 +21,19 @@ public class Client
         .usePlaintext(true)
         .build();
 
-        final GreetingServiceGrpc.GreetingServiceStub greetingServiceStub = GreetingServiceGrpc.newStub(channel);
+        final GreetingServiceGrpc.GreetingServiceStub stub = GreetingServiceGrpc.newStub(channel);
+        String opt = args.length > 0 ? args[0] : "default";
+        switch (opt){
+            case "write":
+                writeOpt(stub);
+                break;
+            default:
+                System.out.println("Para ejecutar write utilizar el siguiente comando:");
+                System.out.println("mvn package exec:java -Dexec.mainClass=pdytr.example.grpc.Client -Dexec.args=\"write\"");
+        }
+    }
 
+    private static void writeOpt(GreetingServiceGrpc.GreetingServiceStub greetingServiceStub) throws IOException {
         StreamObserver<WriteRequest> streamObserver = greetingServiceStub.write(new FTPClient());
         InputStream inputStream = Files.newInputStream(Paths.get("/home/nico/gitProyects/pdytr/pdytr/practica3/files/cliente-files/prueba.txt"));
         byte[] bytes = new byte[3];
@@ -39,6 +50,6 @@ public class Client
         }
         inputStream.close();
         streamObserver.onCompleted();
-
     }
+
 }
