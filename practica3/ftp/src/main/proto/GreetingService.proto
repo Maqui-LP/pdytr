@@ -1,0 +1,19 @@
+syntax = "proto3";
+package pdytr.example.grpc;
+
+// Write request
+message WriteRequest {
+  string filename = 1;
+  int64 totalBytesToRead = 2;
+  bytes data = 3;
+}
+message WriteResponse {
+  int64 totalBytesWritten = 1;
+}
+service GreetingService {
+  //Write operation definition:
+  rpc write(stream WriteRequest) returns (WriteResponse);
+  //Read definition:
+
+}
+
