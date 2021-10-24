@@ -1,6 +1,13 @@
 syntax = "proto3";
 package pdytr.example.grpc;
 
+enum Status {
+  PENDING = 0;
+  IN_PROGRESS = 1;
+  SUCCESS = 2;
+  FAILED = 3;
+}
+
 // Write request
 message WriteRequest {
   string filename = 1;
@@ -9,11 +16,11 @@ message WriteRequest {
 }
 message WriteResponse {
   int64 totalBytesWritten = 1;
+  Status status = 2;
 }
 service GreetingService {
   //Write operation definition:
   rpc write(stream WriteRequest) returns (WriteResponse);
   //Read definition:
-
 }
 
