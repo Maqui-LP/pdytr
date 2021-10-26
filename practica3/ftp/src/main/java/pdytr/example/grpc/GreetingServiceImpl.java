@@ -11,7 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,17 +21,21 @@ public class GreetingServiceImpl extends GreetingServiceImplBase {
     //private final Path pathMuestra = Paths.get("/pdytr/ftp/archivos-grpc/");
 
     private final Logger LOGGER = Logger.getLogger(GreetingServiceImpl.class.getName());
+    private ReentrantLock block = new ReentrantLock();
 
     @Override
     public StreamObserver<WriteRequest> write(final StreamObserver<WriteResponse> responseObserver) {
         return new StreamObserver<WriteRequest>() {
 
             Path path;
+            long total = 0;
+            long beforeWrite = 0;
 
             @Override
             public void onNext(WriteRequest value) {
                 path = getFullPath(value.getFilename());
-
+                block.lock();
+                beforeWrite = getBytesBeforeWrite(path);
                 try {
                     Files.write(path,value.getData().toByteArray(),StandardOpenOption.CREATE,StandardOpenOption.APPEND);
                 } catch (IOException e) {
@@ -42,18 +46,24 @@ public class GreetingServiceImpl extends GreetingServiceImplBase {
                             .asRuntimeException());
                     return;
                 }
-
+                total += getBytesAfterWrite(path, beforeWrite);
+                block.unlock();
             }
 
             @Override
             public void onError(Throwable t) {
-
+                responseObserver.onError(
+                        Status.INTERNAL
+                        .withDescription("Error en el servidor, causa: " + t.getCause())
+                        .asRuntimeException()
+                );
             }
 
             @Override
             public void onCompleted() {
                 responseObserver.onNext(WriteResponse.newBuilder()
                         .setStatus(pdytr.example.grpc.GreetingServiceOuterClass.Status.SUCCESS)
+                        .setTotalBytesWritten(total)
                         .build()
                 );
                 responseObserver.onCompleted();
@@ -75,7 +85,7 @@ public class GreetingServiceImpl extends GreetingServiceImplBase {
              * @param path
              * @return cantidad de bytes antes de la escritura, -1 si no se pudo determinar
              */
-            private  int getBytesBeforeWrite(Path path){
+            private  long getBytesBeforeWrite(Path path){
                 try {
                     return Files.exists(path) ? Files.readAllBytes(path).length : 0;
                 }catch (IOException e){
@@ -91,8 +101,8 @@ public class GreetingServiceImpl extends GreetingServiceImplBase {
              * @param bytesBeforeWrite
              * @return total de bytes finales, -1 si falla
              */
-            private  int getBytesAfterWrite(Path path, int bytesBeforeWrite){
-                int total = 0;
+            private  long getBytesAfterWrite(Path path, long bytesBeforeWrite){
+                long total = 0;
                 try{
                     if(bytesBeforeWrite > 0){
                         total = Files.readAllBytes(path).length - bytesBeforeWrite;

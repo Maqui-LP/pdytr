@@ -17,7 +17,9 @@ message WriteRequest {
 message WriteResponse {
   int64 totalBytesWritten = 1;
   Status status = 2;
+
 }
+
 service GreetingService {
   //Write operation definition:
   rpc write(stream WriteRequest) returns (WriteResponse);

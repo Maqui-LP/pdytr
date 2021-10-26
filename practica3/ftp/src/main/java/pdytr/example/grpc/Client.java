@@ -7,11 +7,8 @@ import pdytr.example.grpc.GreetingServiceGrpc;
 import pdytr.example.grpc.GreetingServiceOuterClass.WriteRequest;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 public class Client
 {
@@ -33,32 +30,53 @@ public class Client
                 System.out.println("Para ejecutar write utilizar el siguiente comando:");
                 System.out.println("mvn package exec:java -Dexec.mainClass=pdytr.example.grpc.Client -Dexec.args=\"write\"");
         }
-
         closeChannel(channel);
     }
 
-    private static void writeOpt(GreetingServiceGrpc.GreetingServiceStub greetingServiceStub) throws IOException {
-        StreamObserver<WriteRequest> streamObserver = greetingServiceStub.write(new FTPClient());//greetingServiceStub.write(new FTPClient());
+    private static void writeOpt(GreetingServiceGrpc.GreetingServiceStub greetingServiceStub) throws IOException, InterruptedException {
+        final CountDownLatch latch = new CountDownLatch(1);
+        StreamObserver<WriteRequest> requestObserver = greetingServiceStub.write(getStreamResponse(latch));
         RandomAccessFile file = new RandomAccessFile("/home/nico/gitProyects/pdytr/pdytr/practica3/files/cliente-files/prueba","r");
         FileDescriptor fd = file.getFD();
         FileInputStream fis = new FileInputStream(fd);
         byte[] partialData = new byte[1024];
         int byteReaded;
         int totalBytesWritten = 0;
-
         while(fis.available() > 0){
             byteReaded = fis.read(partialData,0,Math.min(1024,fis.available()));
             byte[]cleanArray = Arrays.copyOf(partialData,byteReaded);
-            WriteRequest writeRequest = WriteRequest.newBuilder()
+            final WriteRequest writeRequest = WriteRequest.newBuilder()
                     .setFilename("prueba-server")
                     .setData(ByteString.copyFrom(cleanArray))
                     .setTotalBytesToRead(byteReaded)
                     .build();
-            streamObserver.onNext(writeRequest);
-        }
-        fis.close();
-        streamObserver.onCompleted();
 
+            requestObserver.onNext(writeRequest);
+        }
+        requestObserver.onCompleted();
+        fis.close();
+        latch.await();
+    }
+
+    private static StreamObserver<GreetingServiceOuterClass.WriteResponse> getStreamResponse(final CountDownLatch latch){
+        return new StreamObserver<GreetingServiceOuterClass.WriteResponse>() {
+            @Override
+            public void onNext(GreetingServiceOuterClass.WriteResponse value) {
+                System.out.println("Estado: " + value.getStatus());
+                System.out.println("TOTAL: " + value.getTotalBytesWritten());
+                latch.countDown();
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                latch.countDown();
+            }
+
+            @Override
+            public void onCompleted() {
+                latch.countDown();
+            }
+        };
     }
 
     /**
