@@ -61,7 +61,7 @@ public class Client
             Iterator<ReadResponse> stream = greetingServiceStub.read(readRequest);
             while(stream.hasNext()){
                 ReadResponse response = stream.next();
-                System.out.println(response.getData());
+                //System.out.println(response.getData());
                 Path store = Paths.get("src/main/resources/client-files/" + readRequest.getFilename());
                 Files.write(store, response.getData().toByteArray(), StandardOpenOption.CREATE,StandardOpenOption.APPEND);
             }

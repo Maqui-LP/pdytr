@@ -64,8 +64,8 @@ public class GreetingServiceImpl extends GreetingServiceImplBase {
                 bytesToRead = bytesToRead - bytesRead;
                 //totalBytesRead = totalBytesRead + bytesRead;
                 isEOF = (fileInputStream.available() == 0);
-                System.out.println(cleanData);
-                System.out.println(bytesToRead);
+                //System.out.println(cleanData);
+                //System.out.println(bytesToRead);
                 ReadResponse response = ReadResponse.newBuilder()
                     .setData(ByteString.copyFrom(cleanData))
                     .setBytesRead(bytesRead)
