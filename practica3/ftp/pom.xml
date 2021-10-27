@@ -72,5 +72,14 @@
         </executions>
       </plugin>
     </plugins>
+    <resources>
+      <resource>
+        <directory>src/resources</directory>
+        <includes>
+          <include>**/*</include>
+          <include>**/*txt</include>
+        </includes>
+      </resource>
+    </resources>
   </build>
 </project>

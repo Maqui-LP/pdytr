@@ -17,9 +17,7 @@ import java.util.logging.Logger;
 
 public class GreetingServiceImpl extends GreetingServiceImplBase {
 
-    private final Path storageDirectory = Paths.get("/home/nico/gitProyects/pdytr/pdytr/practica3/files/server-files/");
-    //private final Path pathMuestra = Paths.get("/pdytr/ftp/archivos-grpc/");
-
+    private Path store = Paths.get("src/main/resources/server-files/");
     private final Logger LOGGER = Logger.getLogger(GreetingServiceImpl.class.getName());
     private ReentrantLock block = new ReentrantLock();
 
@@ -77,7 +75,8 @@ public class GreetingServiceImpl extends GreetingServiceImplBase {
              * @return path al archivo
              */
             private Path getFullPath(String filename){
-                return storageDirectory.resolve(filename);
+                //return storageDirectory.resolve(filename);
+                return store.resolve(filename);
             }
 
             /**
