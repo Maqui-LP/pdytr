@@ -22,8 +22,6 @@ import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import com.google.protobuf.ByteString;
 
-
-
 public class GreetingServiceImpl extends GreetingServiceImplBase {
 
     private Path store = Paths.get("src/main/resources/server-files/");
@@ -55,27 +53,28 @@ public class GreetingServiceImpl extends GreetingServiceImplBase {
 
             file.seek(initialPosition);
             long bytesToRead = Math.min(request.getBytesToRead(),fileInputStream.available());
+            System.out.println(bytesToRead);
             boolean isEOF = (fileInputStream.available() == 0);
-
-            while((!isEOF) && (totalBytesRead < bytesToRead)) {
-                int bytesInChunk = Math.min(chunkSize,fileInputStream.available());
-                byte[] data = new byte[bytesInChunk];
-                bytesRead = fileInputStream.read(data, 0, bytesInChunk);
-                if(bytesRead < bytesInChunk) {
-                    data = Arrays.copyOf(data, bytesRead);
-                }
-
-                totalBytesRead = totalBytesRead + bytesRead;
+            while((!isEOF) && (bytesToRead > 0)) {
+                byte[] data = new byte[chunkSize];
+                //bytesRead = fileInputStream.read(data, 0, Math.min(chunkSize,fileInputStream.available()));
+                int bytesToReadInt = Math.toIntExact(bytesToRead);
+                bytesRead = fileInputStream.read(data, 0, Math.min(chunkSize, bytesToReadInt));
+                byte[] cleanData = Arrays.copyOf(data, bytesRead);
+                bytesToRead = bytesToRead - bytesRead;
+                //totalBytesRead = totalBytesRead + bytesRead;
                 isEOF = (fileInputStream.available() == 0);
-                System.out.println(data);
+                System.out.println(cleanData);
+                System.out.println(bytesToRead);
                 ReadResponse response = ReadResponse.newBuilder()
-                    .setData(ByteString.copyFrom(data))
+                    .setData(ByteString.copyFrom(cleanData))
                     .setBytesRead(bytesRead)
-                    .setContinue((!isEOF) && (totalBytesRead < bytesToRead))
+                    .setContinue((!isEOF) && (bytesToRead > 0))
                     .build();
                 responseObserver.onNext(response);
             }
             responseObserver.onCompleted();
+            fileInputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
             responseObserver.onError(e);

@@ -34,24 +34,28 @@ public class Client
                 writeOpt(writeStub);
                 break;
             case "read":
+                long position = args.length > 2 ? Long.parseLong(args[2]) : Long.parseLong("0");
+                long bytesToRead = args.length > 3 ? Long.parseLong(args[3]) : Long.parseLong("0");
+                //long position = Long.parseLong(args[2]);
+                //long bytesToRead = Long.parseLong(args[3]);
                 final GreetingServiceGrpc.GreetingServiceBlockingStub readStub = GreetingServiceGrpc.newBlockingStub(channel);
-                readOpt(readStub, filename);
+                readOpt(readStub, filename, position, bytesToRead);
                 break;
             default:
                 System.out.println("Para ejecutar write utilizar el siguiente comando:");
                 System.out.println("mvn package exec:java -Dexec.mainClass=pdytr.example.grpc.Client -Dexec.args=\"write\"");
                 System.out.println("Para ejecutar read utilizar el siguiente comando:");
-                System.out.println("mvn package exec:java -Dexec.mainClass=pdytr.example.grpc.Client -Dexec.args=\"read\"");
+                System.out.println("mvn package exec:java -Dexec.mainClass=pdytr.example.grpc.Client -Dexec.args=\"read filename position bytesToRead\" ");
         }
         closeChannel(channel);
     }
 
-    private static void readOpt(GreetingServiceGrpc.GreetingServiceBlockingStub greetingServiceStub, String filename)  throws IOException {
+    private static void readOpt(GreetingServiceGrpc.GreetingServiceBlockingStub greetingServiceStub, String filename, long position, long bytesToRead)  throws IOException {
         try {
             ReadRequest readRequest = ReadRequest.newBuilder()
                 .setFilename(filename)
-                .setPosition(0)
-                .setBytesToRead(2000)
+                .setPosition(position)
+                .setBytesToRead(bytesToRead)
                 .build();
             
             Iterator<ReadResponse> stream = greetingServiceStub.read(readRequest);
