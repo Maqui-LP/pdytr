@@ -26,10 +26,7 @@ import com.google.protobuf.ByteString;
 
 public class GreetingServiceImpl extends GreetingServiceImplBase {
 
-    private final Path storageDirectory = Paths.get("/home/nico/gitProyects/pdytr/pdytr/practica3/files/server-files/");
-    //private final Path pathMuestra = Paths.get("/pdytr/ftp/archivos-grpc/");
-
-
+    private Path store = Paths.get("src/main/resources/server-files/");
     private final Logger LOGGER = Logger.getLogger(GreetingServiceImpl.class.getName());
     private ReentrantLock block = new ReentrantLock();
     private final int chunkSize = 1024;
@@ -37,14 +34,10 @@ public class GreetingServiceImpl extends GreetingServiceImplBase {
     @Override
     public void read(ReadRequest request, StreamObserver<ReadResponse> responseObserver) {
         try {
-            Path currentRelativePath = Paths.get("");
-            System.out.println(currentRelativePath);
-            String s = currentRelativePath.toAbsolutePath().toString();
-            System.out.println(s);
             int totalBytesRead = 0;
             int bytesRead = 0;
             long initialPosition = request.getPosition();
-            RandomAccessFile file = new RandomAccessFile(s+"/src/main/resources/"+request.getFilename(), "r");
+            RandomAccessFile file = new RandomAccessFile(store + "/" + request.getFilename(), "r");
             FileDescriptor fileDescriptor = file.getFD();
             FileInputStream fileInputStream = new FileInputStream(fileDescriptor);
             
@@ -145,7 +138,8 @@ public class GreetingServiceImpl extends GreetingServiceImplBase {
              * @return path al archivo
              */
             private Path getFullPath(String filename){
-                return storageDirectory.resolve(filename);
+                //return storageDirectory.resolve(filename);
+                return store.resolve(filename);
             }
 
             /**

@@ -58,7 +58,8 @@ public class Client
             while(stream.hasNext()){
                 ReadResponse response = stream.next();
                 System.out.println(response.getData());
-                Files.write(Paths.get(readRequest.getFilename() + "output"), response.getData().toByteArray(), StandardOpenOption.CREATE,StandardOpenOption.APPEND);
+                Path store = Paths.get("src/main/resources/client-files/" + readRequest.getFilename());
+                Files.write(store, response.getData().toByteArray(), StandardOpenOption.CREATE,StandardOpenOption.APPEND);
             }
         } catch(Exception e) {
             e.printStackTrace();
@@ -69,17 +70,16 @@ public class Client
     private static void writeOpt(GreetingServiceGrpc.GreetingServiceStub greetingServiceStub) throws IOException, InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         StreamObserver<WriteRequest> requestObserver = greetingServiceStub.write(getStreamResponse(latch));
-        RandomAccessFile file = new RandomAccessFile("/home/nico/gitProyects/pdytr/pdytr/practica3/files/cliente-files/prueba","r");
+        RandomAccessFile file = new RandomAccessFile("src/main/resources/client-files/prueba","r");
         FileDescriptor fd = file.getFD();
         FileInputStream fis = new FileInputStream(fd);
         byte[] partialData = new byte[1024];
         int byteReaded;
-        int totalBytesWritten = 0;
         while(fis.available() > 0){
             byteReaded = fis.read(partialData,0,Math.min(1024,fis.available()));
             byte[]cleanArray = Arrays.copyOf(partialData,byteReaded);
             final WriteRequest writeRequest = WriteRequest.newBuilder()
-                    .setFilename("prueba-server")
+                    .setFilename("prueba.txt-server")
                     .setData(ByteString.copyFrom(cleanArray))
                     .setTotalBytesToRead(byteReaded)
                     .build();
