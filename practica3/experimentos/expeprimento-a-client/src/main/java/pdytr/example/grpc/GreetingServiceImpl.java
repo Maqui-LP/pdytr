@@ -1,6 +1,10 @@
 package pdytr.example.grpc;
 
+import io.grpc.Context;
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
+
+import java.util.concurrent.TimeUnit;
 
 public class GreetingServiceImpl extends GreetingServiceGrpc.GreetingServiceImplBase {
   @Override
@@ -21,5 +25,44 @@ public class GreetingServiceImpl extends GreetingServiceGrpc.GreetingServiceImpl
 
     // When you are done, you must call onCompleted.
     responseObserver.onCompleted();
+  }
+
+  @Override
+  public StreamObserver<GreetingServiceOuterClass.HelloRequest> greetingClientStream(final StreamObserver<GreetingServiceOuterClass.HelloResponse> responseObserver) {
+    return new StreamObserver<GreetingServiceOuterClass.HelloRequest>() {
+      @Override
+      public void onNext(GreetingServiceOuterClass.HelloRequest value) {
+        System.out.println("Deberia hacer algo aca pero como no hay cliente no hago nada, solo duermo.");
+        try {
+          Thread.sleep(2000);
+        } catch (InterruptedException e) {
+          System.out.println("Error al dormir thread.." + e.getCause());
+          this.onError(e);
+        }
+        if(Context.current().isCancelled()){
+          responseObserver.onError(
+                  Status.CANCELLED
+                  .withDescription("Cancelado por el cliente")
+                  .asRuntimeException());
+          return;
+        }
+      }
+
+      @Override
+      public void onError(Throwable t) {
+        responseObserver.onError(
+                Status.INTERNAL.withDescription("ERROR algo sucedio en el server, causa: " + t.getCause())
+                        .asRuntimeException()
+        );
+      }
+
+      @Override
+      public void onCompleted() {
+        responseObserver.onNext(GreetingServiceOuterClass.HelloResponse.newBuilder()
+                .setGreeting("Hola juan carlos")
+                .build());
+        responseObserver.onCompleted();
+      }
+    };
   }
 }
