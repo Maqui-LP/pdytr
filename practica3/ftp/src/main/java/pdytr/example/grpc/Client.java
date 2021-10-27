@@ -5,10 +5,16 @@ import io.grpc.*;
 import io.grpc.stub.StreamObserver;
 import pdytr.example.grpc.GreetingServiceGrpc;
 import pdytr.example.grpc.GreetingServiceOuterClass.WriteRequest;
-
+import pdytr.example.grpc.GreetingServiceOuterClass.ReadRequest;
+import pdytr.example.grpc.GreetingServiceOuterClass.ReadResponse;
 import java.io.*;
 import java.util.Arrays;
 import java.util.concurrent.*;
+import java.util.Iterator;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Client
 {
@@ -20,17 +26,42 @@ public class Client
         .usePlaintext(true)
         .build();
 
-        final GreetingServiceGrpc.GreetingServiceStub stub = GreetingServiceGrpc.newStub(channel);
         String opt = args.length > 0 ? args[0] : "default";
         switch (opt){
             case "write":
-                writeOpt(stub);
+                final GreetingServiceGrpc.GreetingServiceStub writeStub = GreetingServiceGrpc.newStub(channel);
+                writeOpt(writeStub);
+                break;
+            case "read":
+                final GreetingServiceGrpc.GreetingServiceBlockingStub readStub = GreetingServiceGrpc.newBlockingStub(channel);
+                readOpt(readStub);
                 break;
             default:
                 System.out.println("Para ejecutar write utilizar el siguiente comando:");
                 System.out.println("mvn package exec:java -Dexec.mainClass=pdytr.example.grpc.Client -Dexec.args=\"write\"");
+                System.out.println("Para ejecutar read utilizar el siguiente comando:");
+                System.out.println("mvn package exec:java -Dexec.mainClass=pdytr.example.grpc.Client -Dexec.args=\"read\"");
         }
         closeChannel(channel);
+    }
+
+    private static void readOpt(GreetingServiceGrpc.GreetingServiceBlockingStub greetingServiceStub)  throws IOException {
+        try {
+            ReadRequest readRequest = ReadRequest.newBuilder()
+                .setFilename("archivoPrueba.txt")
+                .setPosition(0)
+                .setBytesToRead(2000)
+                .build();
+            
+            Iterator<ReadResponse> stream = greetingServiceStub.read(readRequest);
+            while(stream.hasNext()){
+                ReadResponse response = stream.next();
+                Files.write(Paths.get(readRequest.getFilename() + "output"), response.getData().getBytes(), StandardOpenOption.CREATE,StandardOpenOption.APPEND);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     private static void writeOpt(GreetingServiceGrpc.GreetingServiceStub greetingServiceStub) throws IOException, InterruptedException {

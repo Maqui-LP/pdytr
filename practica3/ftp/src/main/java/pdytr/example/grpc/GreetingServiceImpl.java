@@ -5,6 +5,8 @@ import io.grpc.stub.StreamObserver;
 import pdytr.example.grpc.GreetingServiceGrpc.GreetingServiceImplBase;
 import pdytr.example.grpc.GreetingServiceOuterClass.WriteRequest;
 import pdytr.example.grpc.GreetingServiceOuterClass.WriteResponse;
+import pdytr.example.grpc.GreetingServiceOuterClass.ReadRequest;
+import pdytr.example.grpc.GreetingServiceOuterClass.ReadResponse;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,14 +16,79 @@ import java.nio.file.StandardOpenOption;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.io.RandomAccessFile;
+import java.util.Arrays;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import com.google.protobuf.ByteString;
+
+
 
 public class GreetingServiceImpl extends GreetingServiceImplBase {
 
     private final Path storageDirectory = Paths.get("/home/nico/gitProyects/pdytr/pdytr/practica3/files/server-files/");
     //private final Path pathMuestra = Paths.get("/pdytr/ftp/archivos-grpc/");
 
+
     private final Logger LOGGER = Logger.getLogger(GreetingServiceImpl.class.getName());
     private ReentrantLock block = new ReentrantLock();
+    private final int chunkSize = 1024;
+
+    @Override
+    public void read(ReadRequest request, StreamObserver<ReadResponse> responseObserver) {
+        try {
+            Path currentRelativePath = Paths.get("");
+            System.out.println(currentRelativePath);
+            String s = currentRelativePath.toAbsolutePath().toString();
+            System.out.println(s);
+            int totalBytesRead = 0;
+            int bytesRead = 0;
+            long initialPosition = request.getPosition();
+            RandomAccessFile file = new RandomAccessFile(s+"/src/main/resources/"+request.getFilename(), "r");
+            FileDescriptor fileDescriptor = file.getFD();
+            FileInputStream fileInputStream = new FileInputStream(fileDescriptor);
+            
+            if(file.length() < initialPosition){
+                file.close();
+                fileInputStream.close();
+                ReadResponse response = ReadResponse.newBuilder()
+                    .setData("")
+                    .setBytesRead(0)
+                    .setContinue(false)
+                    .build();
+                responseObserver.onNext(response);
+                responseObserver.onCompleted();
+            }
+
+            file.seek(initialPosition);
+            long bytesToRead = Math.min(request.getBytesToRead(),fileInputStream.available());
+            boolean isEOF = (fileInputStream.available() == 0);
+
+            while((!isEOF) && (totalBytesRead < bytesToRead)) {
+                byte[] data = new byte[chunkSize];
+                bytesRead = fileInputStream.read(data, 0, chunkSize);
+                if(bytesRead < chunkSize) {
+                    data = Arrays.copyOf(data, bytesRead);
+                }
+
+                totalBytesRead = totalBytesRead + bytesRead;
+                isEOF = (fileInputStream.available() == 0);
+
+                ReadResponse response = ReadResponse.newBuilder()
+                    .setData(data.toString())
+                    .setBytesRead(bytesRead)
+                    .setContinue((!isEOF) && (totalBytesRead < bytesToRead))
+                    .build();
+                responseObserver.onNext(response);
+            }
+            responseObserver.onCompleted();
+        } catch (Exception e) {
+            e.printStackTrace();
+            responseObserver.onError(e);
+        }
+    }
+
+
 
     @Override
     public StreamObserver<WriteRequest> write(final StreamObserver<WriteResponse> responseObserver) {

@@ -17,12 +17,24 @@ message WriteRequest {
 message WriteResponse {
   int64 totalBytesWritten = 1;
   Status status = 2;
+}
 
+// Read request
+message ReadRequest {
+  string filename = 1;
+  int64 position = 2;
+  int64 bytesToRead = 3;
+}
+message ReadResponse {
+  string data = 1;
+  int64 bytesRead = 2;
+  bool continue = 3;
 }
 
 service GreetingService {
   //Write operation definition:
   rpc write(stream WriteRequest) returns (WriteResponse);
   //Read definition:
+  rpc read(ReadRequest) returns (stream ReadResponse);
 }
 
