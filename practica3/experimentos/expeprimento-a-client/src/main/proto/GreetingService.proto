@@ -25,5 +25,6 @@ service GreetingService {
   // Define a RPC operation
    //rpc greeting(HelloRequest) returns (stream HelloResponse);
    rpc greeting(HelloRequest) returns (HelloResponse);
+   rpc greetingClientStream(stream HelloRequest) returns (HelloResponse);
 }
 
