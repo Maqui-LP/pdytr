@@ -1,0 +1,14 @@
+syntax = "proto3";
+package pdytr.example.grpc;
+
+message TimeRequest {
+    bool hello = 1;
+}
+
+message TimeResponse {
+    bool hello = 1;
+}
+
+service TimeService {
+    rpc time(TimeRequest) returns (TimeResponse);
+}
