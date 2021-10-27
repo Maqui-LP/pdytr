@@ -52,7 +52,7 @@ public class GreetingServiceImpl extends GreetingServiceImplBase {
                 file.close();
                 fileInputStream.close();
                 ReadResponse response = ReadResponse.newBuilder()
-                    .setData("")
+                    .setData(ByteString.copyFrom("".getBytes()))
                     .setBytesRead(0)
                     .setContinue(false)
                     .build();
@@ -65,17 +65,18 @@ public class GreetingServiceImpl extends GreetingServiceImplBase {
             boolean isEOF = (fileInputStream.available() == 0);
 
             while((!isEOF) && (totalBytesRead < bytesToRead)) {
-                byte[] data = new byte[chunkSize];
-                bytesRead = fileInputStream.read(data, 0, chunkSize);
-                if(bytesRead < chunkSize) {
+                int bytesInChunk = Math.min(chunkSize,fileInputStream.available());
+                byte[] data = new byte[bytesInChunk];
+                bytesRead = fileInputStream.read(data, 0, bytesInChunk);
+                if(bytesRead < bytesInChunk) {
                     data = Arrays.copyOf(data, bytesRead);
                 }
 
                 totalBytesRead = totalBytesRead + bytesRead;
                 isEOF = (fileInputStream.available() == 0);
-
+                System.out.println(data);
                 ReadResponse response = ReadResponse.newBuilder()
-                    .setData(data.toString())
+                    .setData(ByteString.copyFrom(data))
                     .setBytesRead(bytesRead)
                     .setContinue((!isEOF) && (totalBytesRead < bytesToRead))
                     .build();

@@ -27,6 +27,7 @@ public class Client
         .build();
 
         String opt = args.length > 0 ? args[0] : "default";
+        String filename = args.length > 1 ? args[1] : "archivoPrueba.txt";
         switch (opt){
             case "write":
                 final GreetingServiceGrpc.GreetingServiceStub writeStub = GreetingServiceGrpc.newStub(channel);
@@ -34,7 +35,7 @@ public class Client
                 break;
             case "read":
                 final GreetingServiceGrpc.GreetingServiceBlockingStub readStub = GreetingServiceGrpc.newBlockingStub(channel);
-                readOpt(readStub);
+                readOpt(readStub, filename);
                 break;
             default:
                 System.out.println("Para ejecutar write utilizar el siguiente comando:");
@@ -45,10 +46,10 @@ public class Client
         closeChannel(channel);
     }
 
-    private static void readOpt(GreetingServiceGrpc.GreetingServiceBlockingStub greetingServiceStub)  throws IOException {
+    private static void readOpt(GreetingServiceGrpc.GreetingServiceBlockingStub greetingServiceStub, String filename)  throws IOException {
         try {
             ReadRequest readRequest = ReadRequest.newBuilder()
-                .setFilename("archivoPrueba.txt")
+                .setFilename(filename)
                 .setPosition(0)
                 .setBytesToRead(2000)
                 .build();
@@ -56,7 +57,8 @@ public class Client
             Iterator<ReadResponse> stream = greetingServiceStub.read(readRequest);
             while(stream.hasNext()){
                 ReadResponse response = stream.next();
-                Files.write(Paths.get(readRequest.getFilename() + "output"), response.getData().getBytes(), StandardOpenOption.CREATE,StandardOpenOption.APPEND);
+                System.out.println(response.getData());
+                Files.write(Paths.get(readRequest.getFilename() + "output"), response.getData().toByteArray(), StandardOpenOption.CREATE,StandardOpenOption.APPEND);
             }
         } catch(Exception e) {
             e.printStackTrace();
