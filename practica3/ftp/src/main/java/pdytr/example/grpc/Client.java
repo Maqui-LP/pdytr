@@ -5,10 +5,16 @@ import io.grpc.*;
 import io.grpc.stub.StreamObserver;
 import pdytr.example.grpc.GreetingServiceGrpc;
 import pdytr.example.grpc.GreetingServiceOuterClass.WriteRequest;
-
+import pdytr.example.grpc.GreetingServiceOuterClass.ReadRequest;
+import pdytr.example.grpc.GreetingServiceOuterClass.ReadResponse;
 import java.io.*;
 import java.util.Arrays;
 import java.util.concurrent.*;
+import java.util.Iterator;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Client
 {
@@ -20,17 +26,49 @@ public class Client
         .usePlaintext(true)
         .build();
 
-        final GreetingServiceGrpc.GreetingServiceStub stub = GreetingServiceGrpc.newStub(channel);
         String opt = args.length > 0 ? args[0] : "default";
+        String filename = args.length > 1 ? args[1] : "archivoPrueba.txt";
         switch (opt){
             case "write":
-                writeOpt(stub);
+                final GreetingServiceGrpc.GreetingServiceStub writeStub = GreetingServiceGrpc.newStub(channel);
+                writeOpt(writeStub);
+                break;
+            case "read":
+                long position = args.length > 2 ? Long.parseLong(args[2]) : Long.parseLong("0");
+                long bytesToRead = args.length > 3 ? Long.parseLong(args[3]) : Long.parseLong("0");
+                //long position = Long.parseLong(args[2]);
+                //long bytesToRead = Long.parseLong(args[3]);
+                final GreetingServiceGrpc.GreetingServiceBlockingStub readStub = GreetingServiceGrpc.newBlockingStub(channel);
+                readOpt(readStub, filename, position, bytesToRead);
                 break;
             default:
                 System.out.println("Para ejecutar write utilizar el siguiente comando:");
                 System.out.println("mvn package exec:java -Dexec.mainClass=pdytr.example.grpc.Client -Dexec.args=\"write\"");
+                System.out.println("Para ejecutar read utilizar el siguiente comando:");
+                System.out.println("mvn package exec:java -Dexec.mainClass=pdytr.example.grpc.Client -Dexec.args=\"read filename position bytesToRead\" ");
         }
         closeChannel(channel);
+    }
+
+    private static void readOpt(GreetingServiceGrpc.GreetingServiceBlockingStub greetingServiceStub, String filename, long position, long bytesToRead)  throws IOException {
+        try {
+            ReadRequest readRequest = ReadRequest.newBuilder()
+                .setFilename(filename)
+                .setPosition(position)
+                .setBytesToRead(bytesToRead)
+                .build();
+            
+            Iterator<ReadResponse> stream = greetingServiceStub.read(readRequest);
+            while(stream.hasNext()){
+                ReadResponse response = stream.next();
+                //System.out.println(response.getData());
+                Path store = Paths.get("src/main/resources/client-files/" + readRequest.getFilename());
+                Files.write(store, response.getData().toByteArray(), StandardOpenOption.CREATE,StandardOpenOption.APPEND);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     private static void writeOpt(GreetingServiceGrpc.GreetingServiceStub greetingServiceStub) throws IOException, InterruptedException {
