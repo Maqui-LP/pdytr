@@ -77,13 +77,15 @@ public class Client
         RandomAccessFile file = new RandomAccessFile("src/main/resources/client-files/prueba","r");
         FileDescriptor fd = file.getFD();
         FileInputStream fis = new FileInputStream(fd);
-        byte[] partialData = new byte[1024];
+        byte[] partialData;
+        int size = file.length() > 100_000_000 ? 900_000 : 1024;
+        partialData = new byte[size];
         int byteReaded;
         while(fis.available() > 0){
-            byteReaded = fis.read(partialData,0,Math.min(1024,fis.available()));
+            byteReaded = fis.read(partialData,0,Math.min(size,fis.available()));
             byte[]cleanArray = Arrays.copyOf(partialData,byteReaded);
             final WriteRequest writeRequest = WriteRequest.newBuilder()
-                    .setFilename("prueba.txt-server")
+                    .setFilename("prueba-server")
                     .setData(ByteString.copyFrom(cleanArray))
                     .setTotalBytesToRead(byteReaded)
                     .build();
