@@ -1,6 +1,7 @@
 package pdytr.example.grpc;
 
 import java.util.Arrays;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import io.grpc.*;
@@ -23,21 +24,28 @@ public class Client
       // It is up to the client to determine whether to block the call
       // Here we create a blocking stub, but an async stub,
       // or an async stub with Future are always possible.
-      GreetingServiceGrpc.GreetingServiceBlockingStub stub = 
-        //GreetingServiceGrpc.newBlockingStub(channel).withDeadlineAfter(3,TimeUnit.SECONDS);
-              GreetingServiceGrpc.newBlockingStub(channel).withDeadlineAfter(deadlineMs,TimeUnit.MILLISECONDS);
 
-      GreetingServiceOuterClass.HelloRequest request =
-        GreetingServiceOuterClass.HelloRequest.newBuilder()
-          .setName("Ray")
-          .build();
+        CountDownLatch latch = new CountDownLatch(10);
+      for(int i=1 ; i<= 10; i++){
+          try{
+              GreetingServiceGrpc.GreetingServiceBlockingStub stub =
+                      //GreetingServiceGrpc.newBlockingStub(channel).withDeadlineAfter(3,TimeUnit.SECONDS);
+                      GreetingServiceGrpc.newBlockingStub(channel).withDeadlineAfter(deadlineMs,TimeUnit.MILLISECONDS);
 
-      // Finally, make the call using the stub
-      GreetingServiceOuterClass.HelloResponse response = 
-        stub.greeting(request);
-
-      System.out.println(response);
-
+              GreetingServiceOuterClass.HelloRequest request =
+                      GreetingServiceOuterClass.HelloRequest.newBuilder()
+                              .setName("Ray")
+                              .build();
+              GreetingServiceOuterClass.HelloResponse response =
+                      stub.greeting(request);
+                System.out.println(response);
+          }catch (Exception e) {
+              System.out.println("Ocurrio un error: " + e.getMessage());
+          }finally {
+              latch.countDown();
+          }
+      }
+      latch.await();
       // A Channel should be shutdown before stopping the process.
       channel.shutdownNow();
     }
