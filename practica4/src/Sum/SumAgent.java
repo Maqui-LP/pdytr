@@ -3,12 +3,17 @@ import java.net.Socket;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import jade.core.*;
 
 public class SumAgent extends Agent {
-    private final String manchine = "Main-container";
+    private final String manchine = "Main-Container";
     private Location origin = null;
     private Integer sum = null;
     private String filePath = "/temp/file";
@@ -16,6 +21,7 @@ public class SumAgent extends Agent {
     public void printAgentPresentation() {
         System.out.println("Agente con nombre local: " + getLocalName());
         System.out.println("y mi nombre es: " + getName());
+        System.out.println("Localizacion: " + this.origin.getID() + " Location Name: " + this.origin.getName());
     }
 
     public void setup(){
@@ -23,7 +29,6 @@ public class SumAgent extends Agent {
         this.getOpt(args);
         this.origin = here();
         this.printAgentPresentation();
-        System.out.println("Localizacion: " + this.origin.getID());
 
         try{
             ContainerID destination = new ContainerID(this.manchine, null);
@@ -37,8 +42,10 @@ public class SumAgent extends Agent {
 
     private void getOpt(Object[] args) {
         try{
-            if(args.length != 0){
+            if(args != null && args.length != 0){
                 this.filePath = (String) args[0];
+            }else{
+                this.filePath = "/home/nico/Documentos/proyectos/pdytr/practica4/src/Sum/temp/file";
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -47,16 +54,21 @@ public class SumAgent extends Agent {
 
     protected void afterMove(){
         Location actual = here();
+        System.out.println("Location after move: " + actual.getName() + " id: " + actual.getID());
 
         if(!actual.getName().equals(origin.getName())){
             try{
                 List<String> numbers = Files.readAllLines(Paths.get(this.filePath),Charset.forName("utf8"));
+                //List<String> numbers = Stream.of("1","2","3","4","5","6","7","8","9").collect(Collectors.toList());
+
                 int result = 0;
 
                 for(String num: numbers){
                     result += Integer.parseInt(num);
                 }
+
                 sum = result;
+
             }catch(NumberFormatException e){
                 System.out.println("Not a number ~(>_<)~");
             }catch(IOException e){
