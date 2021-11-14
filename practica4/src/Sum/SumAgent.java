@@ -11,6 +11,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import jade.core.*;
+import jade.domain.FIPAAgentManagement.MissingArgument;
 
 public class SumAgent extends Agent {
     private final String manchine = "Main-Container";
@@ -42,10 +43,10 @@ public class SumAgent extends Agent {
 
     private void getOpt(Object[] args) {
         try{
-            if(args != null && args.length != 0){
+           if(args != null && args.length != 0){
                 this.filePath = (String) args[0];
             }else{
-                this.filePath = "/home/nico/Documentos/proyectos/pdytr/practica4/src/Sum/temp/file";
+               throw new MissingArgument("No suministro el path al archivo");
             }
         }catch(Exception e){
             e.printStackTrace();
