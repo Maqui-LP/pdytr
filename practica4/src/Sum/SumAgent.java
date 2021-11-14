@@ -1,14 +1,8 @@
 import java.io.IOException;
-import java.net.Socket;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import jade.core.*;
 import jade.domain.FIPAAgentManagement.MissingArgument;
@@ -60,8 +54,6 @@ public class SumAgent extends Agent {
         if(!actual.getName().equals(origin.getName())){
             try{
                 List<String> numbers = Files.readAllLines(Paths.get(this.filePath),Charset.forName("utf8"));
-                //List<String> numbers = Stream.of("1","2","3","4","5","6","7","8","9").collect(Collectors.toList());
-
                 int result = 0;
 
                 for(String num: numbers){
