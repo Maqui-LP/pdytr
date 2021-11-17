@@ -11,7 +11,7 @@ public class SumAgent extends Agent {
     private final String manchine = "Main-Container";
     private Location origin = null;
     private Integer sum = null;
-    private String filePath = "/temp/file";
+    private String filePath = "file";
 
     public void printAgentPresentation() {
         System.out.println("Agente con nombre local: " + getLocalName());
@@ -21,7 +21,7 @@ public class SumAgent extends Agent {
 
     public void setup(){
         Object[] args = getArguments();
-        this.getOpt(args);
+        //this.getOpt(args);
         this.origin = here();
         this.printAgentPresentation();
 
