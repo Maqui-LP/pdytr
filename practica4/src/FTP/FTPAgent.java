@@ -1,16 +1,11 @@
 import jade.core.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
+
 import java.nio.file.Paths;
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
-import java.nio.file.DirectoryStream;
-import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
+
 import java.nio.file.StandardOpenOption;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.FileInputStream;
+
 
 public class FTPAgent extends Agent
 {
@@ -45,29 +40,61 @@ public class FTPAgent extends Agent
         protected void afterMove()
         {
                 Location here = here();
-
-                    switch (this.method) {
-                    case "write":
-                            this.writeAfterMove(here);
-                            break;
-                    case "read":
-                            this.readAfterMove(here);
-                            break;
-                    }
+                        switch (this.method) {
+                        case "write":
+                                this.writeAfterMove(here);
+                                break;
+                        case "read":
+                                this.readAfterMove(here);
+                                break;
+                        case "readwrite":
+                                this.readWriteAfterMove(here);
+                                break;
+                        }
         }
 
+        private void readWriteAfterMove(Location here) {
+                if (!here.getName().equals(this.origen.getName())) {
+                        this.file = FTPCommand.read(this.destinationPath, this.currentSize, this.currentSize, this.fileSize);
+                        this.currentSize += this.file.length;
+                        System.out.printf("Reading %d bytes of %d\n", this.file.length, this.fileSize);
+                        doMove(new ContainerID(this.origen.getName(), null));
+                        return;
+                }
+                else {
+                        try {
+                                Files.write(Paths.get(this.sourcePath), this.file, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                                System.out.printf("Writing %d bytes of %d\n", this.file.length, this.fileSize);
+                        } catch (IOException e) {
+                                e.printStackTrace();
+                        } finally {
+                                if (this.fileSize > this.currentSize) {
+                                        System.out.println("Bytes left!");
+                                        doMove(new ContainerID("Main-Container", null));
+                                } else {
+                                        System.out.println("The file " + this.sourcePath + " was read correctly and successfuly loaded in " + this.destinationPath);
+                                        this.currentSize = 0;
+                                        this.destinationPath = "copia" + this.sourcePath;
+                                        this.method = "write";
+                                        this.file = null;
+                                        doMove(new ContainerID("Main-Container", null));
+                                }
+                        }                
+                        
+                }   
+        }
         private void writeAfterMove(Location here)
         {
             if (!here.getName().equals(this.origen.getName())) {
-                    FTPCommand.write(this.destinationPath, this.file, this.currentSize, this.fileSize);
-                    doMove(new ContainerID(this.origen.getName(), null));
+                FTPCommand.write(this.destinationPath, this.file, this.currentSize, this.fileSize);
+                doMove(new ContainerID(this.origen.getName(), null));
             } else if (this.fileSize > this.currentSize) {
-                    this.file = FTPCommand.read(this.sourcePath, this.currentSize, this.currentSize, this.fileSize);
-                    this.currentSize += this.file.length;
-                    System.out.printf("%d of %d bytes readed\n", this.file.length, this.fileSize);
-                    doMove(new ContainerID("Main-Container", null));
+                this.file = FTPCommand.read(this.sourcePath, this.currentSize, this.currentSize, this.fileSize);
+                this.currentSize += this.file.length;
+                System.out.printf("%d of %d bytes read\n", this.file.length, this.fileSize);
+                doMove(new ContainerID("Main-Container", null));
             } else {
-                    System.out.println("The file " + this.sourcePath + " was written in the remote directory " + this.destinationPath);
+                System.out.println("The file " + this.sourcePath + " was written in the remote directory " + this.destinationPath);
             }
         }
 
@@ -75,10 +102,10 @@ public class FTPAgent extends Agent
         {
             if (!here.getName().equals(this.origen.getName())) {
                 this.file = FTPCommand.read(this.destinationPath, this.currentSize, this.currentSize, this.fileSize);
-                    this.currentSize += this.file.length;
-                    System.out.printf("Reading %d bytes of %d\n", this.file.length, this.fileSize);
-                    doMove(new ContainerID(this.origen.getName(), null));
-                    return;
+                this.currentSize += this.file.length;
+                System.out.printf("Reading %d bytes of %d\n", this.file.length, this.fileSize);
+                doMove(new ContainerID(this.origen.getName(), null));
+                return;
             }
 
             try {
@@ -96,8 +123,8 @@ public class FTPAgent extends Agent
                 System.out.println("Bytes left!");
                 doMove(new ContainerID("Main-Container", null));
             } else {
-                System.out.println("The file " + this.sourcePath + " was readed correctly and successfuly loaded in " + this.destinationPath);
-        }
+                System.out.println("The file " + this.sourcePath + " was read correctly and successfuly loaded in " + this.destinationPath);
+                }
         }
 
         private void getopt(Object[] args){
@@ -105,6 +132,7 @@ public class FTPAgent extends Agent
                         switch ((String) args[0]) {
                         case "write":
                         case "read":
+                        case "readwrite":
                                 if (args.length != 3) {
                                         System.out.println("3 argument needed: command, local directory and remote directory");
                                         System.exit(1);
