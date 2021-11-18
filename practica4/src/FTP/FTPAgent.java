@@ -77,7 +77,7 @@ public class FTPAgent extends Agent
                                         System.out.println("Bytes left!");
                                         doMove(new ContainerID("Main-Container", null));
                                 } else {
-                                        System.out.println("The file " + this.sourcePath + " was readed correctly and successfuly loaded in " + this.destinationPath);
+                                        System.out.println("The file " + this.sourcePath + " was read correctly and successfuly loaded in " + this.destinationPath);
                                         this.currentSize = 0;
                                         // this.sourcePath = "prac4b.pdf";
                                         this.destinationPath = "prac4c.pdf";
@@ -97,7 +97,7 @@ public class FTPAgent extends Agent
             } else if (this.fileSize > this.currentSize) {
                 this.file = FTPCommand.read(this.sourcePath, this.currentSize, this.currentSize, this.fileSize);
                 this.currentSize += this.file.length;
-                System.out.printf("%d of %d bytes readed\n", this.file.length, this.fileSize);
+                System.out.printf("%d of %d bytes read\n", this.file.length, this.fileSize);
                 doMove(new ContainerID("Main-Container", null));
             } else {
                 System.out.println("The file " + this.sourcePath + " was written in the remote directory " + this.destinationPath);
@@ -129,7 +129,7 @@ public class FTPAgent extends Agent
                 System.out.println("Bytes left!");
                 doMove(new ContainerID("Main-Container", null));
             } else {
-                System.out.println("The file " + this.sourcePath + " was readed correctly and successfuly loaded in " + this.destinationPath);
+                System.out.println("The file " + this.sourcePath + " was read correctly and successfuly loaded in " + this.destinationPath);
                 }
         }
 
