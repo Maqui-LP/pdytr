@@ -9,7 +9,8 @@ public class FTPCommand {
     public static byte[] read(String path, int position, int currentSize, long fileSize)
         {
             try {
-                int chunk = 1024;
+                //int chunk = 1024;
+                int chunk = 200_000;
                 int noBytes = ((int) fileSize - currentSize) < chunk
                         ? (int) (fileSize - currentSize)
                         : chunk; 

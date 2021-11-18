@@ -1,16 +1,11 @@
 import jade.core.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
+
 import java.nio.file.Paths;
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
-import java.nio.file.DirectoryStream;
-import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
+
 import java.nio.file.StandardOpenOption;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.FileInputStream;
+
 
 public class FTPAgent extends Agent
 {
@@ -79,10 +74,9 @@ public class FTPAgent extends Agent
                                 } else {
                                         System.out.println("The file " + this.sourcePath + " was read correctly and successfuly loaded in " + this.destinationPath);
                                         this.currentSize = 0;
-                                        // this.sourcePath = "prac4b.pdf";
-                                        this.destinationPath = "prac4c.pdf";
+                                        this.destinationPath = "copia" + this.sourcePath;
                                         this.method = "write";
-                                        this.file = FTPCommand.read(this.sourcePath, this.currentSize, this.currentSize, this.fileSize);
+                                        this.file = null;
                                         doMove(new ContainerID("Main-Container", null));
                                 }
                         }                
@@ -101,7 +95,7 @@ public class FTPAgent extends Agent
                 doMove(new ContainerID("Main-Container", null));
             } else {
                 System.out.println("The file " + this.sourcePath + " was written in the remote directory " + this.destinationPath);
-                }
+            }
         }
 
         private void readAfterMove(Location here)
